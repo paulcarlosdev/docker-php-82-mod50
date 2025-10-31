@@ -1,0 +1,26 @@
+services:
+
+  web:
+    build: apache
+    container_name: ubuntu_php_md01
+    working_dir: /var/www/html
+    volumes:
+      - ./html:/var/www/html
+      - ./apache/proxy.conf:/etc/apache2/sites-enabled/000-default.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - backend
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "2"
+#          memory: "2G"
+#        reservations:
+#          cpus: "1"
+#          memory: "1G"
+      
+networks:
+  backend:
+    driver: bridge
